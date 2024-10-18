@@ -40,16 +40,20 @@ def load_prompts(file_path):
 def get_streamed_completion(content):
     prompts = load_prompts('.ai/msgenai/ai/rule1.txt')  # Load prompts from the file
     coding_standards = load_prompts('.ai/msgenai/ai/common_coding_standards.txt')
+    a11y_standards = load_prompts('.ai/msgenai/ai/accessibility.txt')
     custom_rule_prompt = "\n".join(prompts)
-    common_coding_standards = "\n".join(coding_standards)
+    common_coding_prompt = "\n".join(coding_standards)
+    a11y_prompt = "\n".join(a11y_standards)
 
     # Combine the default review instruction with the custom rules
     prompt = (
         "Please review the following code for adherence to both common coding standards and the specific custom rules outlined below. Both aspects are important and should be covered in your review.\n\n"
         "Common Coding Standards:\n"
-        f"{common_coding_standards}\n\n"
+        f"{common_coding_prompt}\n\n"
         "Custom Rules:\n"
         f"{custom_rule_prompt}\n\n"
+        "A11Y Rules:\n"
+        f"{a11y_prompt}\n\n"
         "Code:\n"
         f"{content}\n\n"
         "Review Instructions:\n"
