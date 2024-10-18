@@ -50,7 +50,7 @@ def get_streamed_completion(content):
         f"{content}\n\n"
         "Review Points:\n"
         "- Check for adherence to common coding standards (e.g., naming conventions, code structure, errors, security concerns).\n"
-        "- Evaluate against the custom rules provided.\n"
+        "- Only comment on violations of the custom rules provided; do not mention if rules are not applicable.\n"
     )
     response = client.chat.completions.create(
         model="gpt-4o-mini",
