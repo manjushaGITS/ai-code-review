@@ -1,4 +1,5 @@
-Rule: If applicable, ensure that all function names are in camelCase. Note that single-word function names should be in lowercase. Please review the code for adherence to this rule, and consider multi-word function names appropriately. (Do not comment if there are no functions present.) (Only comment if there are violations.)
-Rule: If applicable, check that all variable names are in snake_case. When there is only one word variable name should be in lowercase. Please verify the code for this convention. (Do not comment if there are no variables present.) (Only comment if there are violations.)
-Rule: If applicable, ensure that all classes are named in PascalCase. Please check class names for compliance with this rule. (Do not comment if there are no classes present.) (Only comment if there are violations.)
+Rule: Ensure all function names are in camelCase; single-word function names should be in lowercase. Review for compliance with this rule, and only report violations. Do not mention if there are no functions.
 
+Rule: Check that all variable names are in snake_case; single-word variable names should be in lowercase. Verify for compliance with this convention and only report violations. Do not mention if there are no variables.
+
+Rule: Ensure all classes are named in PascalCase. Check class names for compliance, and only report violations. Do not mention if there are no classes.
