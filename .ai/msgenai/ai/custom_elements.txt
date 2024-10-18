@@ -1,0 +1,1 @@
+Rule: Ensure all HTML elements are imported from the et-campfire package. Check for any native HTML elements and report violations.
