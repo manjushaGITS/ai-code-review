@@ -1,1 +1,5 @@
 
+Rule: Ensure all images have alt attributes for screen readers
+Rule: Check that all form inputs have associated labels.
+Rule: Verify that color contrast is sufficient for users with visual impairments.
+Rule: All actionable html elements like button and anchor should have an aria attribute
