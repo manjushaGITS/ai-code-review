@@ -1,11 +1,11 @@
-function GREETMASTER(name) {
+function GREETMASTERFirst(name) {
   var greeting = "Hello, " + name + "!";
   return greeting;
 }
-GREETMASTER();
+GREETMASTERFirst();
 
 function renderButton() {
-  const buttonEle = document.createElement('button');
-  button.textContent = "click here";
-  document.body.appendChild(buttonEle);
+  const buttonElement = document.createElement('button');
+  buttonElement.textContent = "click here";
+  document.body.appendChild(buttonElement);
 }
