@@ -41,9 +41,12 @@ def get_streamed_completion(content):
     prompts = load_prompts('.ai/msgenai/ai/rule1.txt')  # Load prompts from the file
     coding_standards = load_prompts('.ai/msgenai/ai/common_coding_standards.txt')
     a11y_standards = load_prompts('.ai/msgenai/ai/accessibility.txt')
+    custom_elements_standards = load_prompts('.ai/msgenai/ai/custom_elements.txt')
+    
     custom_rule_prompt = "\n".join(prompts)
     common_coding_prompt = "\n".join(coding_standards)
     a11y_prompt = "\n".join(a11y_standards)
+    custom_elements_prompt = "\n".join(custom_elements_standards)
 
     # Combine the default review instruction with the custom rules
     prompt = (
@@ -54,6 +57,8 @@ def get_streamed_completion(content):
         f"{custom_rule_prompt}\n\n"
         "A11Y Rules:\n"
         f"{a11y_prompt}\n\n"
+        "Custom Element Rules:\n"
+        f"{custom_elements_prompt}\n\n"
         "Code:\n"
         f"{content}\n\n"
         "Review Instructions:\n"
