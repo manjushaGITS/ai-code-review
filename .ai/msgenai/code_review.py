@@ -43,14 +43,14 @@ def get_streamed_completion(content):
 
     # Combine the default review instruction with the custom rules
     prompt = (
-        "Please review the following code for both common coding standards and the specific rules mentioned below.\n\n"
+        "Please review the following code for adherence to openAI's coding review and the specific custom rules outlined below.\n\n"
         "Custom Rules:\n"
         f"{custom_rule_prompt}\n\n"
         "Code:\n"
         f"{content}\n\n"
-        "Review Points:\n"
-        "- Check for adherence to common coding standards (e.g., naming conventions, code structure, errors, security concerns).\n"
-        "- Only comment on violations of the custom rules provided; do not mention if rules are not applicable.\n"
+        "Review Instructions:\n"
+        "- Mention all openAI's coding review comments."
+        "- But, focus exclusively on violations of the custom rules. Do not mention any custom rules that are not applicable or the absence of functions, variables, or classes."
     )
     response = client.chat.completions.create(
         model="gpt-4o-mini",
