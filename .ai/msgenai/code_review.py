@@ -39,18 +39,22 @@ def load_prompts(file_path):
 
 def get_streamed_completion(content):
     prompts = load_prompts('.ai/msgenai/ai/rule1.txt')  # Load prompts from the file
+    coding_standards = load_prompts('.ai/msgenai/ai/common_coding_standards.txt')
     custom_rule_prompt = "\n".join(prompts)
+    common_coding_standards = "\n".join(coding_standards)
 
     # Combine the default review instruction with the custom rules
     prompt = (
         "Please review the following code for adherence to openAI's coding review and the specific custom rules outlined below.\n\n"
+        "Common Coding Standards:\n"
+        f"{common_coding_standards}\n\n"
         "Custom Rules:\n"
         f"{custom_rule_prompt}\n\n"
         "Code:\n"
         f"{content}\n\n"
         "Review Instructions:\n"
-        "- Mention all openAI's coding review comments."
-        "- But, focus exclusively on violations of the custom rules. Do not mention any custom rules that are not applicable or the absence of functions, variables, or classes."
+        "- Evaluate the code for both common coding standards and custom rules.\n"
+        "- Report only on violations and avoid mentioning the absence of functions, variables, or classes unless it is directly relevant to a rule.\n"
     )
     response = client.chat.completions.create(
         model="gpt-4o-mini",
