@@ -46,7 +46,7 @@ def get_streamed_completion(content):
 
     # Combine the default review instruction with the custom rules
     prompt = (
-        "Please review the following code for adherence to both OpenAI suggested coding concerns and the specific custom rules outlined below. Both aspects are important and should be covered in your review.\n\n"
+        "Please review the code:\n"
         "A11Y Rules:\n"
         f"{a11y_prompt}\n\n"
         "Custom Element Rules:\n"
