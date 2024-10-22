@@ -46,7 +46,7 @@ def get_streamed_completion(content):
 
     # Combine the default review instruction with the custom rules
     prompt = (
-        "Please do the common code review of the code and then perform the review according to the rules provided below:\n"
+        "Please do the review:\n"
         "A11Y Rules:\n"
         f"{a11y_prompt}\n\n"
         "Custom Element Rules:\n"
@@ -61,18 +61,27 @@ def get_streamed_completion(content):
         messages=[{"role": "user", "content": prompt}],
         stream=True,
     )
+    response1 = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": content}],
+        stream=True,
+    )
 
     comment = ""  # Initialize the comment variable
     for chunk in response:
-        print("Chunk received:", chunk)  # Debug line
         delta_content = chunk.choices[0].delta.content if chunk.choices and chunk.choices[0].delta else None
         if delta_content:
-            print("comment=", delta_content)
             comment += delta_content
         else:
             print("No content in chunk")
-    if comment:
-        pr.create_issue_comment(comment)
+    for chunk1 in response1:
+        delta1_content = chunk1.choices[0].delta.content if chunk1.choices and chunk1.choices[0].delta else None
+        if delta1_content:
+            comment1 += delta1_content
+        else:
+            print("No content in chunk")
+    if comment || comment1:
+        pr.create_issue_comment(comment+comment1)
 def main(diff):
     for file in diff:
         if file.filename.endswith('.js'):
