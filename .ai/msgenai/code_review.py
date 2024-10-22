@@ -80,7 +80,7 @@ def get_streamed_completion(content):
             comment1 += delta1_content
         else:
             print("No content in chunk")
-    if comment || comment1:
+    if comment or comment1:
         pr.create_issue_comment(comment+comment1)
 def main(diff):
     for file in diff:
