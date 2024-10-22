@@ -46,7 +46,7 @@ def get_streamed_completion(content):
 
     # Combine the default review instruction with the custom rules
     prompt = (
-        "Please review the code:\n"
+        "Please do the common code review of the code and then perform the review according to the rules provided below:\n"
         "A11Y Rules:\n"
         f"{a11y_prompt}\n\n"
         "Custom Element Rules:\n"
