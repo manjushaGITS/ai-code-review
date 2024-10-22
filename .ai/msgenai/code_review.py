@@ -15,9 +15,7 @@ client = OpenAI(api_key=openai_api_key)
 repo = github.get_repo(os.getenv('GITHUB_REPOSITORY'))
 
 pull_request_url = os.getenv('GITHUB_REF')
-print("pull_request_url=", pull_request_url);
 pull_request_number = pull_request_url.split('/')[-2]
-print("pull_request_number=", pull_request_number)
 if pull_request_url:
     try:
         pull_request_number = int(pull_request_number)
@@ -39,7 +37,6 @@ def load_prompts(file_path):
 
 def get_streamed_completion(content):
     prompts = load_prompts('.ai/msgenai/ai/rule1.txt')  # Load prompts from the file
-    coding_standards = load_prompts('.ai/msgenai/ai/common_coding_standards.txt')
     a11y_standards = load_prompts('.ai/msgenai/ai/accessibility.txt')
     custom_elements_standards = load_prompts('.ai/msgenai/ai/custom_elements.txt')
     
@@ -50,20 +47,15 @@ def get_streamed_completion(content):
 
     # Combine the default review instruction with the custom rules
     prompt = (
-        "Please review the following code for adherence to both common coding standards and the specific custom rules outlined below. Both aspects are important and should be covered in your review.\n\n"
+        "Please review the following code for adherence to both OpenAI suggested coding concerns and the specific custom rules outlined below. Both aspects are important and should be covered in your review.\n\n"
         "Common Coding Standards:\n"
         f"{common_coding_prompt}\n\n"
-        "Custom Rules:\n"
-        f"{custom_rule_prompt}\n\n"
         "A11Y Rules:\n"
         f"{a11y_prompt}\n\n"
         "Custom Element Rules:\n"
         f"{custom_elements_prompt}\n\n"
         "Code:\n"
         f"{content}\n\n"
-        "Review Instructions:\n"
-        "- Evaluate the code for both common coding standards and custom rules.\n"
-        "- Report all violations and avoid mentioning the absence of functions, variables, or classes unless it is directly relevant to a custom rule.\n"
     )
     response = client.chat.completions.create(
         model="gpt-4o-mini",
