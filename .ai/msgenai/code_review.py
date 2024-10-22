@@ -68,6 +68,7 @@ def get_streamed_completion(content):
     )
 
     comment = ""  # Initialize the comment variable
+    comment1 = ""
     for chunk in response:
         delta_content = chunk.choices[0].delta.content if chunk.choices and chunk.choices[0].delta else None
         if delta_content:
